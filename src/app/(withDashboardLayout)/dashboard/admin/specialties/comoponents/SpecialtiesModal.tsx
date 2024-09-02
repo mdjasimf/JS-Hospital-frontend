@@ -11,7 +11,9 @@ type TProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const SpecialtiesModal = ({ open, setOpen }: TProps) => {
-  const handleFormSubmit = (values: FieldValues) => {};
+  const handleFormSubmit = (values: FieldValues) => {
+    console.log(values);
+  };
 
   return (
     <div>
@@ -22,7 +24,7 @@ const SpecialtiesModal = ({ open, setOpen }: TProps) => {
               <JsInput name="title" label="title" />
             </Grid>
             <Grid item md={6}>
-              <JSFileUploader />
+              <JSFileUploader name="file" label="Upload file" />
             </Grid>
           </Grid>
           <Box
