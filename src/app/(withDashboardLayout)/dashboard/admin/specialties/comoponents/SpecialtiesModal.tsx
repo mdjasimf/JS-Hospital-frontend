@@ -2,17 +2,40 @@ import JSFileUploader from "@/components/Form/JSFileUploader";
 import JsForm from "@/components/Form/JsForm";
 import JsInput from "@/components/Form/JsInput";
 import JSMoodal from "@/components/Shared/JSMoodal/JSMoodal";
+import { useCreateSpecialtiesMutation } from "@/redux/api/specialtiesApi";
+import { modifiedFormData } from "@/utils/modifiesFormData";
 import { Box, Button, Grid } from "@mui/material";
-
 import React from "react";
 import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
+
 type TProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
 const SpecialtiesModal = ({ open, setOpen }: TProps) => {
-  const handleFormSubmit = (values: FieldValues) => {
-    console.log(values);
+  const [createSpecialties] = useCreateSpecialtiesMutation();
+  const handleFormSubmit = async (values: FieldValues) => {
+    if (!values.file) {
+      return toast.error("something went wrong");
+    }
+    if (!values.title) {
+      return toast.error("something went wrong");
+    }
+    const data = modifiedFormData(values);
+
+    try {
+      const res = await createSpecialties(data).unwrap();
+      console.log(res);
+      if (res?.id) {
+        toast.success("Specialties created successfully");
+        setOpen(false);
+      }
+      console.log(res);
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
 
   return (
