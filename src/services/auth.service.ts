@@ -8,17 +8,20 @@ import {
 } from "@/utils/local-storage";
 
 export const storeUserInfo = ({ accessToken }: { accessToken: string }) => {
-  console.log(accessToken);
+  // console.log(accessToken);
   return setToLocalStorage(authKey, accessToken);
 };
 export const getUserInfo = () => {
   const authToken = getFromLocalStorage(authKey);
+  //   console.log(authToken);
   if (authToken) {
-    const decodeData: any = decodedToken(authToken);
+    const decodedData: any = decodedToken(authToken);
     return {
-      ...decodeData,
-      role: decodeData?.role.toLowerCase(),
+      ...decodedData,
+      role: decodedData?.role?.toLowerCase(),
     };
+  } else {
+    return "";
   }
 };
 export const isLoggedIn = () => {

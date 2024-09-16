@@ -14,6 +14,7 @@ instance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     const accessToken = getFromLocalStorage(authKey);
+
     if (accessToken) {
       config.headers.Authorization = accessToken;
     }
@@ -35,7 +36,6 @@ instance.interceptors.response.use(
       data: response?.data?.data,
       meta: response?.data?.meta,
     };
-
     return responseObject;
   },
   async function (error) {
@@ -50,6 +50,7 @@ instance.interceptors.response.use(
       const accessToken = response?.data?.accessToken;
       config.headers["Authorization"] = accessToken;
       setToLocalStorage(authKey, accessToken);
+
       return instance(config);
     } else {
       const responseObject: IGenericErrorResponse = {

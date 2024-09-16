@@ -8,14 +8,14 @@ export const loginUser = async (data: FieldValues) => {
     {
       method: "POST",
       headers: {
-        "Content-type": "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-      // cache: "no-store",
       credentials: "include",
+      // cache: "no-store",
     }
   );
-  const usrInfo = await res.json();
+  const userInfo = await res.json();
 
-  return usrInfo;
+  return userInfo;
 };
