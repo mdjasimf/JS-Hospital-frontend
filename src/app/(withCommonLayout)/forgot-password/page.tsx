@@ -6,11 +6,12 @@ import { z } from "zod";
 import KeyIcon from "@mui/icons-material/Key";
 
 import { FieldValues } from "react-hook-form";
-import { useForgotPasswordMutation } from "@/redux/api/authApi";
+
 import { toast } from "sonner";
 import CheckIcon from "@mui/icons-material/Check";
 import JsForm from "@/components/Form/JsForm";
 import JsInput from "@/components/Form/JsInput";
+import { useForgotPasswordMutation } from "@/redux/api/authApi";
 
 const validationSchema = z.object({
   email: z.string().email("Please enter a valid email address!"),

@@ -1,4 +1,5 @@
 import { authKey } from "@/constants.ts/authKey";
+import useUserInfo from "@/hooks/useUserInfo";
 import { deleteCookies } from "@/services/actions/deleteCookies";
 import { logoutUser } from "@/services/actions/logoutUser";
 import { getUserInfo, removeUser } from "@/services/auth.service";
@@ -9,7 +10,7 @@ import React from "react";
 
 const AuthButton = () => {
   const router = useRouter();
-  const userInfo = getUserInfo();
+  const userInfo = useUserInfo();
   const handleLogoutButton = () => {
     logoutUser(router);
   };
