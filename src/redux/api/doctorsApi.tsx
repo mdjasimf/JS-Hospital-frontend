@@ -44,10 +44,10 @@ const doctorsApi = baseApi.injectEndpoints({
           data: data.body,
         };
       },
-      invalidatesTags: [tagTypes.doctor],
+      invalidatesTags: [tagTypes.doctor, tagTypes.user],
     }),
     deleteDoctors: build.mutation({
-      query: (id) => ({
+      query: (id: any) => ({
         url: `/doctor/soft/${id}`,
         method: "DELETE",
       }),

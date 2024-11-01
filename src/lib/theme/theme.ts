@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material/styles";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#1586Fd",
+      main: "#1586fd", // Ensure hex codes are consistent
     },
     secondary: {
       main: "#666f73",
@@ -32,4 +32,6 @@ export const theme = createTheme({
     },
   },
 });
+
+// Customizing shadow
 theme.shadows[1] = "0px 5px 22px lightgray";

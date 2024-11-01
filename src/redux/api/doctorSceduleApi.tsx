@@ -21,9 +21,10 @@ const doctorScheduleApi = baseApi.injectEndpoints({
         };
       },
       transformResponse: (response: [], meta: IMeta) => {
+        console.log(meta);
         return {
-          doctorSchedules: response,
           meta,
+          doctorSchedules: response,
         };
       },
       providesTags: [tagTypes.doctorSchedule],
@@ -53,6 +54,7 @@ const doctorScheduleApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.doctorSchedule],
     }),
   }),
+  overrideExisting: true,
 });
 
 export const {

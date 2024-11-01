@@ -42,6 +42,17 @@ export default function DashboardDrawer({
   };
 
   const { data, isLoading } = useGetSingleUserQuery({});
+
+  const [isClient, setIsClient] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
+
   // console.log(data);
 
   return (

@@ -1,15 +1,15 @@
-"use client";
+"use client"; // Ensures this component is rendered on the client
 
 import { ThemeProvider } from "@mui/material";
-import { theme } from "../theme/theme";
-import { Provider } from "react-redux";
+import { theme } from "../theme/theme"; // Make sure this is a valid MUI theme
+import { Provider as ReduxProvider } from "react-redux";
 import { store } from "@/redux/store";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Provider store={store}>
+    <ReduxProvider store={store}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
-    </Provider>
+    </ReduxProvider>
   );
 };
 

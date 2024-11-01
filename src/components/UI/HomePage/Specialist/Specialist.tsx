@@ -34,7 +34,7 @@ const Specialist = async () => {
         <Stack direction="row" gap={4} mt={5}>
           {specialties.slice(0, 6).map((specialty: any) => (
             <Box
-              key={specialty.id}
+              key={specialty?.id}
               sx={{
                 flex: 1,
                 width: "150px",
@@ -56,17 +56,17 @@ const Specialist = async () => {
                 },
               }}
               component={Link}
-              href={`/doctors?specialties=${specialty.title}`}
+              href={`/doctors?specialties=${specialty?.title}`}
             >
               <Image
-                src={specialty.icon}
+                src={specialty?.icon}
                 width={100}
                 height={100}
                 alt="specialty icon"
               />
               <Box>
                 <Typography component="p" fontWeight={600} fontSize={18} mt={2}>
-                  {specialty.title}
+                  {specialty?.title}
                 </Typography>
               </Box>
             </Box>

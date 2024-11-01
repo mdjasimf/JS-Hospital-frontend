@@ -28,7 +28,7 @@ const LoginPage = () => {
       if (res?.data?.accessToken) {
         toast.success(res.message);
         storeUserInfo({ accessToken: res?.data?.accessToken });
-        router.push("/dashboard");
+        // router.push("/dashboard");
       } else {
         setError(res.message);
       }
@@ -63,7 +63,12 @@ const LoginPage = () => {
             }}
           >
             <Box>
-              <Image src={assets.svgs.logo} width={50} height={50} alt="logo" />
+              <Image
+                src={assets?.svgs?.logo}
+                width={50}
+                height={50}
+                alt="logo"
+              />
             </Box>
             <Box>
               <Typography variant="h6" fontWeight={600}>
@@ -114,9 +119,11 @@ const LoginPage = () => {
                   />
                 </Grid>
               </Grid>
-              <Typography textAlign="end" component="p" fontWeight={600}>
-                forget password?
-              </Typography>
+              <Link href={"/forgot-password"}>
+                <Typography textAlign="end" component="p" fontWeight={600}>
+                  forget password?
+                </Typography>
+              </Link>
               <Button
                 sx={{
                   margin: "10px 0px",

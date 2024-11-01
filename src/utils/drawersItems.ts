@@ -18,18 +18,18 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 export const drawerItems = (role: UserRole): DrawerItem[] => {
   const roleMenus: DrawerItem[] = [];
 
-  //   const defaultMenus = [
-  //     {
-  //       title: "Profile",
-  //       path: `${role}/profile`,
-  //       icon: PersonIcon,
-  //     },
-  //     {
-  //       title: "Change Password",
-  //       path: `change-password`,
-  //       icon: KeyIcon,
-  //     },
-  //   ];
+  const defaultMenus = [
+    {
+      title: "Profile",
+      path: `${role}/profile`,
+      icon: PersonIcon,
+    },
+    {
+      title: "Change Password",
+      path: `change-password`,
+      icon: KeyIcon,
+    },
+  ];
 
   switch (role) {
     case USER_ROLE.SUPER_ADMIN:
@@ -126,5 +126,5 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
       break;
   }
 
-  return [...roleMenus];
+  return [...roleMenus, ...defaultMenus];
 };

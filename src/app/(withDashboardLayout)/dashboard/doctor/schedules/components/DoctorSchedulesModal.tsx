@@ -9,8 +9,11 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
-import MultipleSelectFieldChip from "./MultipleSelectFieldChip";
+
 import LoadingButton from "@mui/lab/LoadingButton";
+import { useCreateDoctorSheduleMutation } from "@/redux/api/doctorSceduleApi";
+import { toast } from "sonner";
+import MultipleSelectFieldChip from "./MultipleSelectFieldChip";
 
 type TProps = {
   open: boolean;
@@ -33,11 +36,14 @@ const DoctorSchedulesModal = ({ open, setOpen }: TProps) => {
       .millisecond(999)
       .toISOString();
   }
-  const { data, isLoading } = useGetAllSchedulesQuery(query);
+  const { data } = useGetAllSchedulesQuery(query);
   const schedules = data?.schedules;
-
-  const onSubmit = () => {
+  const [createDoctorShedule, { isLoading }] = useCreateDoctorSheduleMutation();
+  const onSubmit = async () => {
     try {
+      const res = await createDoctorShedule({ scheduleIds: selectSchedulIds });
+      console.log(res);
+      setOpen(false);
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +71,7 @@ const DoctorSchedulesModal = ({ open, setOpen }: TProps) => {
         <LoadingButton
           size="small"
           onClick={onSubmit}
-          loading={true}
+          loading={isLoading}
           loadingIndicator="Submitting..."
           variant="contained"
         >

@@ -31,7 +31,7 @@ const DoctorsPage = () => {
   const { data, isLoading } = useGetAllDotorsQuery({ ...query });
   const [deleteDoctors] = useDeleteDoctorsMutation();
   const doctors = data?.doctors;
-
+  console.log(data);
   const meta = data?.meta;
   const handleDelete = async (id: string) => {
     try {
@@ -41,7 +41,7 @@ const DoctorsPage = () => {
         toast.success("Doctor deleted successfully");
       }
     } catch (err: any) {
-      console.log(err.message);
+      console.log(err?.message);
     }
   };
 
@@ -68,12 +68,12 @@ const DoctorsPage = () => {
         return (
           <Box>
             <IconButton
-              onClick={() => handleDelete(row.id)}
+              onClick={() => handleDelete(row?.id)}
               aria-label="delete"
             >
               <GridDeleteIcon sx={{ color: "red" }} />
             </IconButton>
-            <Link href={`/dashboard/admin/doctors/edit/${row.id}`}>
+            <Link href={`/dashboard/admin/doctors/edit/${row?.id}`}>
               <IconButton aria-label="delete">
                 <EditIcon />
               </IconButton>

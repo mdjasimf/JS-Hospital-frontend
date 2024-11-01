@@ -36,8 +36,8 @@ const RegisterPage = () => {
         toast.success(res.message);
         console.log(res);
         const result = await loginUser({
-          email: data.patient.email,
-          password: data.password,
+          email: data?.patient?.email,
+          password: data?.password,
         });
         if (result?.data?.accessToken) {
           storeUserInfo({ accessToken: result?.data?.accessToken });
