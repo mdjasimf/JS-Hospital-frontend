@@ -23,8 +23,8 @@ const doctorScheduleApi = baseApi.injectEndpoints({
       transformResponse: (response: [], meta: IMeta) => {
         console.log(meta);
         return {
-          meta,
           doctorSchedules: response,
+          meta,
         };
       },
       providesTags: [tagTypes.doctorSchedule],

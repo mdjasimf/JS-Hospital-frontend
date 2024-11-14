@@ -1,5 +1,4 @@
 import { IMeta } from "@/types";
-import { createApi } from "@reduxjs/toolkit/query";
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
 
 import type { AxiosRequestConfig, AxiosError } from "axios";

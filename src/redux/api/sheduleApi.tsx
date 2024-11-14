@@ -10,7 +10,7 @@ const sheduleApi = baseApi.injectEndpoints({
         method: "POST",
         data,
       }),
-      invalidatesTags: [tagTypes.shedule],
+      invalidatesTags: [tagTypes.schedule],
     }),
     getAllSchedules: build.query({
       query: (arg: Record<string, any>) => {
@@ -26,7 +26,7 @@ const sheduleApi = baseApi.injectEndpoints({
           meta,
         };
       },
-      providesTags: [tagTypes.shedule],
+      providesTags: [tagTypes.schedule],
     }),
 
     deleteSchedule: build.mutation({
@@ -34,7 +34,7 @@ const sheduleApi = baseApi.injectEndpoints({
         url: `/schedule/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: [tagTypes.shedule],
+      invalidatesTags: [tagTypes.schedule],
     }),
   }),
 });

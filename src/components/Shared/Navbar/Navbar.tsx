@@ -1,14 +1,25 @@
 "use client";
 
-import { Box, Container, Stack, Typography } from "@mui/material";
+import useUserInfo from "@/hooks/useUserInfo";
+import { logoutUser } from "@/services/actions/logoutUser";
+import { getUserInfo } from "@/services/auth.service";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
-  const AuthButton = dynamic(
-    () => import("@/components/UI/HomePage/AuthButton.tsx/AuthButton"),
-    { ssr: false }
-  );
+  const router = useRouter();
+  // const { userId } = getUserInfo() as any;
+  const userInfo = useUserInfo();
+  // const AuthButton = dynamic(
+  //   () => import("@/components/UI/HomePage/AuthButton.tsx/AuthButton"),
+  //   { ssr: false }
+  // );
+
+  const handleLogoutButton = () => {
+    logoutUser(router);
+  };
   return (
     <Box
       sx={{
@@ -59,9 +70,36 @@ const Navbar = () => {
             <Typography component={Link} href="/doctors" color="#ffffff">
               Doctors
             </Typography>
+            {userInfo?.userId && (
+              <Typography component={Link} href="/dashboard" color="#ffffff">
+                Dashboard
+              </Typography>
+            )}
           </Stack>
 
-          <AuthButton />
+          {userInfo?.userId ? (
+            <Button
+              sx={{
+                background:
+                  "linear-gradient(to bottom, rgba(139, 0, 0, 0.9), rgba(139, 0, 0, 0.3))",
+              }}
+              onClick={handleLogoutButton}
+              color="error"
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              component={Link}
+              href="/login"
+              sx={{
+                background:
+                  "linear-gradient(to right, rgba(0, 0, 139, 0.8), rgba(0, 0, 139, 0))",
+              }}
+            >
+              Login
+            </Button>
+          )}
         </Stack>
       </Container>
     </Box>
