@@ -1,8 +1,10 @@
 "use client";
 
 import { getTimeIn12HourFormate } from "@/app/(withDashboardLayout)/dashboard/doctor/schedules/components/MultipleSelectFieldChip";
+import { useCreateAppointmentMutation } from "@/redux/api/appointmentApi";
 
 import { useGetAllDoctorSchedulesQuery } from "@/redux/api/doctorSceduleApi";
+import { useInitialPaymentMutation } from "@/redux/api/paymentApi";
 
 import { DoctorSchedule } from "@/types/doctorSchedules";
 
@@ -84,29 +86,29 @@ const DoctorScheduleSlots = ({ id }: { id: string }) => {
     (doctor: DoctorSchedule) => !doctor.isBooked
   );
 
-  // const [createAppointment] = useCreateAppointmentMutation();
-  // const [initialPayment] = useInitialPaymentMutation();
+  const [createAppointment] = useCreateAppointmentMutation();
+  const [initialPayment] = useInitialPaymentMutation();
 
-  // const handleBookAppointment = async () => {
-  //   try {
-  //     if (id && scheduleId) {
-  //       const res = await createAppointment({
-  //         doctorId: id,
-  //         scheduleId,
-  //       }).unwrap();
+  const handleBookAppointment = async () => {
+    try {
+      if (id && scheduleId) {
+        const res = await createAppointment({
+          doctorId: id,
+          scheduleId,
+        }).unwrap();
 
-  //       if (res.id) {
-  //         const response = await initialPayment(res.id).unwrap();
+        if (res?.id) {
+          const response = await initialPayment(res.id).unwrap();
 
-  //         if (response.paymentUrl) {
-  //           router.push(response.paymentUrl);
-  //         }
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+          if (response.paymentUrl) {
+            router.push(response.paymentUrl);
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box mb={5}>
@@ -164,7 +166,7 @@ const DoctorScheduleSlots = ({ id }: { id: string }) => {
               "Loading..."
             ) : (
               availableNextDaySlots?.map((doctorSchedule: DoctorSchedule) => {
-                const formattedTimeSlot = `${getTimeIn12HourFormatet(
+                const formattedTimeSlot = `${getTimeIn12HourFormate(
                   doctorSchedule?.schedule?.startDate
                 )} - ${getTimeIn12HourFormate(
                   doctorSchedule?.schedule?.endDate
@@ -195,7 +197,7 @@ const DoctorScheduleSlots = ({ id }: { id: string }) => {
       </Box>
 
       <Button
-        // onClick={handleBookAppointment}
+        onClick={handleBookAppointment}
         sx={{ display: "block", mx: "auto" }}
       >
         Book Appointment Now
